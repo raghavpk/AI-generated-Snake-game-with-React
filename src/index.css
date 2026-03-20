@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "VT323", monospace;
+  --font-mono: "VT323", monospace;
+}
+
+body {
+  background-color: #050505;
+  color: #00ffff;
+  font-family: "VT323", monospace;
+  text-transform: uppercase;
+  overflow: hidden;
+}
+
+/* Glitch effect for text */
+.glitch {
+  position: relative;
+  color: #fff;
+  display: inline-block;
+}
+.glitch::before, .glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+.glitch::before {
+  left: 3px;
+  text-shadow: -2px 0 #ff00ff;
+  clip: rect(24px, 550px, 90px, 0);
+  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+.glitch::after {
+  left: -3px;
+  text-shadow: -2px 0 #00ffff;
+  clip: rect(85px, 550px, 140px, 0);
+  animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(14px, 9999px, 11px, 0); }
+  20% { clip: rect(84px, 9999px, 91px, 0); }
+  40% { clip: rect(27px, 9999px, 98px, 0); }
+  60% { clip: rect(56px, 9999px, 12px, 0); }
+  80% { clip: rect(9px, 9999px, 73px, 0); }
+  100% { clip: rect(66px, 9999px, 55px, 0); }
+}
+@keyframes glitch-anim-2 {
+  0% { clip: rect(65px, 9999px, 100px, 0); }
+  20% { clip: rect(12px, 9999px, 55px, 0); }
+  40% { clip: rect(88px, 9999px, 12px, 0); }
+  60% { clip: rect(34px, 9999px, 88px, 0); }
+  80% { clip: rect(90px, 9999px, 23px, 0); }
+  100% { clip: rect(23px, 9999px, 77px, 0); }
+}
+
+/* Scanlines */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.3));
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* CRT Flicker & Screen Tear */
+.screen-tear {
+  animation: tear 4s infinite;
+}
+
+@keyframes tear {
+  0%, 95% { transform: translate(0, 0) skew(0deg); filter: hue-rotate(0deg); }
+  96% { transform: translate(-10px, 0) skew(-15deg); filter: hue-rotate(90deg); }
+  97% { transform: translate(10px, 0) skew(15deg); filter: hue-rotate(-90deg); }
+  98% { transform: translate(0, 0) skew(0deg); filter: hue-rotate(0deg); }
+}
+
+.static-noise {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  width: 200%;
+  height: 200%;
+  background: transparent url('http://assets.iceable.com/img/noise-transparent.png') repeat 0 0;
+  background-repeat: repeat;
+  animation: bg-animation .2s infinite;
+  opacity: 0.4;
+  visibility: visible;
+  pointer-events: none;
+  z-index: 40;
+}
+
+@keyframes bg-animation {
+    0% { transform: translate(0,0) }
+    10% { transform: translate(-5%,-5%) }
+    20% { transform: translate(-10%,5%) }
+    30% { transform: translate(5%,-10%) }
+    40% { transform: translate(-5%,15%) }
+    50% { transform: translate(-10%,5%) }
+    60% { transform: translate(15%,0) }
+    70% { transform: translate(0,10%) }
+    80% { transform: translate(-15%,0) }
+    90% { transform: translate(10%,5%) }
+    100% { transform: translate(5%,0) }
+}
